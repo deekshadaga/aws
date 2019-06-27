@@ -9,13 +9,11 @@ iv)  allow only these protocol in ec2  ssh , http , https
 v)  website in ec2 instances must be accessed via ELB 
 vi) make sure you can not open website by writing ip address or public dns of ec2
 
-not complete still in progress..
-
-###################################################################################
+#######################################################################################################################################
 
 launch 2 instances with mentioned configuration in aws with their ami as rhel 8
 
-###################################################################################
+########################################################################################################################################
 
 follow these steps in both the instances -->
 
@@ -43,6 +41,12 @@ systemctl restart httpd.service
 
 note: allow http,https port security groups
 
-########################################################################################
+######################################################################################################################################
 
-create a load balancer and add these two instances in it ,and wait till the status check shows 2/2
+create a load balancer with only http in its security group and add these two instances in it ,and wait till the status check shows 2/2
+
+now edit security group of instances and in http source set custom with load balancer's security group id 
+
+now the page will oonly load in balancer when dns of load balancer is used with http and not with instances public ip or dns 
+
+#######################################################################################################################################
